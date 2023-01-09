@@ -17,6 +17,7 @@ import com.example.sample.repository.SweetsRepository;
 @Controller
 public class SweetsController {
 
+	// このリポジトリーとGitのリポジトリーは違うよ
 	@Autowired
 	SweetsRepository repository;
 	
