@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Sweets Paradise</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link th:href="@{/css/common.css}" rel="styleSheet">
+</head>
+<body class="has-background-info-light">
+	<div class="container">
+		<section class="hero">
+			<img class="hero-cover" th:src="@{/images/backyard.jpg}">
+			<div class="hero-body">
+			    <h1 class="title grad2">バックヤード</h1>
+			</div>
+			<div class="hero-foot align-right">
+				<a href="/shop2">ショップへ戻る</a>
+			</div>
+		</section>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">在庫補充</p>
+			</header>
+			<form th:action="@{/stock-add}" method="POST" th:object="${backyardForm}">
+			<div class="card-content">
+				<h3 th:if="${msg1 != null}" class="has-text-danger" th:text="${msg1}" />
+
+				<div class="card-content-form">
+					<div class="select">
+						<select th:field="${backyardForm.id}">
+							<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+						</select>
+					</div>
+					<input class="input" type="number" th:field="${backyardForm.addStock}">
+				</div>
+			</div>
+			<footer class="card-footer">
+				<div class="card-footer-item">
+					<button class="button is-primary" type="submit">補充</button>
+				</div>
+			</footer>
+		    </form>
+	    </div>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">新規商品の追加</p>
+			</header>
+			<form th:action="@{/item-insert}" method="POST">
+			<div class="card-content">
+				<h3 th:if="${msg2 != null}" class="has-text-danger" th:text="${msg2}" />
+			</div>
+			<footer class="card-footer">
+				<div class="card-footer-item">
+					<button class="button is-primary" type="submit">追加</button>
+				</div>
+			</footer>
+		    </form>
+	    </div>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">商品の削除</p>
+			</header>
+			<form th:action="@{/item-delete}" method="POST">
+			<div class="card-content">
+				<h3 th:if="${msg3 != null}" class="has-text-danger" th:text="${msg3}" />
+			</div>
+			<footer class="card-footer">
+				<div class="card-footer-item">
+					<button class="button is-primary" type="submit">削除</button>
+				</div>
+			</footer>
+		    </form>
+	    </div>
+    </div>
+</body>
+</html>
