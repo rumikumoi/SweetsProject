@@ -45,16 +45,16 @@ public class SweetsController {
 	@PostMapping("/buy2")
 	public String buy2(SweetsForm sweetsForm, Model model) {
 		List<SweetsData> list = service.updateStock2(sweetsForm);
-		model.addAttribute("sweets", list);
-		return "thanks2";
-//		if (list.size() > 0) {
-//			model.addAttribute("sweets", list);
-//			return "thanks2";
-//		} else {
-//			model.addAttribute("sweetsForm", sweetsForm);
-//			model.addAttribute("msg", "商品を選んでください");
-//			return "shop2";
-//		}
+//		model.addAttribute("sweets", list);
+//		return "thanks2";
+		if (list.size() > 0) {
+			model.addAttribute("sweets", list);
+			return "thanks2";
+		} else {
+			model.addAttribute("sweetsForm", sweetsForm);
+			model.addAttribute("msg", "商品を選んでください");
+			return "shop2";
+		}
 	}
 //
 //	@Autowired
