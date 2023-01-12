@@ -11,7 +11,7 @@
 		<section class="hero">
 			<img class="hero-cover" th:src="@{/images/sweets.jpg}">
 			<div class="hero-body">
-			    <h1 class="title">SweetsProjectへようこそ</h1>
+			    <h1 class="title grad1">SweetsProjectへようこそ</h1>
 			</div>
 		</section>
 		<div class="card">
@@ -20,12 +20,14 @@
 			</header>
 			<div class="card-content">
 				<ul class="shop-list">
-					<li class="shop-list-item" th:each="sweets : ${sweets}" th:text="${sweets.item}" />
+					<li class="shop-list-item" th:each="sweets : ${sweets}">
+						<label th:text="${sweets.item} + ' ' + ${sweets.purchases} + '個'">
+					</li>
 				</ul>
 			</div>
 			<footer class="card-footer">
 				<div class="card-footer-item">
-				    <a href="/shop">ショップへ戻る</a>
+				    <a href="/shop2">ショップへ戻る</a>
 				</div>
 			</footer>
 		</div>
