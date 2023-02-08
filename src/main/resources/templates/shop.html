@@ -20,23 +20,33 @@
 			</header>
 			<form th:action="@{/buy}" method="POST" th:object="${sweetsForm}">
 			<div class="card-content">
+				<h3 class="has-text-danger" th:text="${msg}" />
 				<ul class="shop-list">
 					<li class="shop-list-item" th:each="sweets, st : *{sweetsList}">
-					
 						<div class="columns is-mobile">
 							<div class="column is-one-fifth">
-								<label class="checkbox item-name" th:for="*{sweetsList[__${st.index}__].id}" />
-									<input type="checkbox" th:field="*{sweetsList[__${st.index}__].checked}" th:id="*{sweetsList[__${st.index}__].id}">
-									[[*{sweetsList[__${st.index}__].item}]]
-								</label>
+								<th:block th:if="*{sweetsList[__${st.index}__].stock} == 0">
+								<span class="tag is-danger">Sold Out</span>
+								</th:block>
+								<label th:text="*{sweetsList[__${st.index}__].item}" />
 							</div>
 							<div class="column is-number">
 								<span style="margin-left: 5px;" th:text="*{sweetsList[__${st.index}__].stock}" />個
 							</div>
 							<div class="column">
+								<div class="select is-small" th:if="*{sweetsList[__${st.index}__].stock} > 0">
+									<select th:field="*{sweetsList[__${st.index}__].purchases}">
+										<option th:value="0" selected></option> <!-- 未選択 -->
+										<option th:each="i : ${#numbers.sequence(1, sweets.stock)}" th:value="${i}">[[${i}]]</option>
+									</select>
+								</div>
+							</div>
+							<div class="column">
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].item}" />
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].id}" />
+								<!-- ここでは、kindが不要になったのでkind削除
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].kind}" />
+								-->
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].stock}" />
 							</div>
 						</div>
