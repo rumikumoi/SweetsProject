@@ -69,3 +69,8 @@ html, body {
 .align-right {
 	text-align: right;
 }
+
+.input.item {
+  margin-right: 1rem;
+  width: 10rem;
+}
