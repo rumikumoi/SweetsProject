@@ -3,6 +3,7 @@ package com.example.sample;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import com.example.sample.entity.Sweets;
 import com.example.sample.service.BackyardService;
 import com.example.sample.service.SweetsService;
 
-//@Controller
+@Controller
 public class BackyardController {
 
 	@Autowired
@@ -36,7 +37,7 @@ public class BackyardController {
 		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
-		return "backyard2";
+		return "backyard";
 	}
 
 	/**
@@ -52,7 +53,7 @@ public class BackyardController {
 		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 		
-		return "backyard2";
+		return "backyard";
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class BackyardController {
 		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
-		return "backyard2";
+		return "backyard";
 	}
 
 	/**
@@ -86,7 +87,7 @@ public class BackyardController {
 		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
-		return "backyard2";
+		return "backyard";
 	}
 
 }
