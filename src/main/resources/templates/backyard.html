@@ -50,11 +50,11 @@
 			<div class="card-content">
 				<h3 th:if="${msg2 != null}" class="has-text-danger" th:text="${msg2}" />
 				
-				<input class="input" type="text">
+				<input class="input" type="text" require th:field="${backyardForm.newItem}">
 				<select th:field="${backyardForm.id}">
-					<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+					<option th:each="sweets : ${sweetsList}" th:value="${sweets.kind}">[[${sweets.kind}]]</option>
 				</select>
-				<input class="input" type="number">
+				<input class="input" type="number" th:field="${backyardForm.addStock}">
 			</div>
 			<footer class="card-footer">
 				<div class="card-footer-item">

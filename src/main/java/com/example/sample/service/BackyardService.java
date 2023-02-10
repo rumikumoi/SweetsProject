@@ -1,12 +1,10 @@
 package com.example.sample.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.sample.dto.BackyardData;
 import com.example.sample.entity.Sweets;
 import com.example.sample.repository.SweetsRepository;
 
@@ -33,18 +31,9 @@ public class BackyardService {
 	 */
 	public String addStock(String id, int addStock) {
 		String msg = "在庫数を補充しました";
-		
-		List<BackyardData> addStockList = new ArrayList<BackyardData>();
-		
-		if (addStock > 0) {
-			BackyardData backyard = new BackyardData();
-			backyard.setId(id);
-			backyard.setAddStock(addStock);
-			addStockList.add(backyard);
-			
+
 			//repositoryでDB更新
-			repository.addStock(addStock, id);
-		}
+		repository.addStock(addStock, id);
 		
 		return msg;
 	}
@@ -57,9 +46,13 @@ public class BackyardService {
 	 */
 	public String insertItem(Sweets sweets) {
 		String msg = "商品を新規追加しました";
+				
+		String maxIdStr = repository.getMaxId();
+		int maxId = Integer.parseInt(maxIdStr) + 1;
+		String setNewId = String.valueOf(maxId);
 		
 		//repositoryでDB更新
-//		repository.insertItem(sweets);
+//		repository.insertItem(setNewId, form.getNewItem(), form.getKind(), form.getAddStock());
 		
 		return msg;
 	}
@@ -71,14 +64,6 @@ public class BackyardService {
 	 */
 	public String deleatItem(String id) {
 		String msg = "商品を削除しました";
-		
-		if (id != null) {
-			BackyardData backyard = new BackyardData();
-			backyard.setId(id);
-			
-			repository.deleteStock(id);
-		}
-		
 		
 		//repositoryでDB更新
 		repository.deleteStock(id);

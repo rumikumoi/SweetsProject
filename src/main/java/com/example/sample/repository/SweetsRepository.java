@@ -24,10 +24,16 @@ public interface SweetsRepository extends JpaRepository<Sweets, String> {
 	@Query("UPDATE Sweets SET stock = (stock + :stock) where id = :id")
 	void addStock(@Param("stock") int stock, @Param("id") String id);
 	
-//	@Query("INSERT INTO Sweets VALUES (id, name, number)")
-//	void insertItem(@Param("id") String id, @Param("name") String name, @Param("number") int number);
+	@Query("SELECT MAX(id) FROM Sweets")
+	String getMaxId();
+	
+	@Modifying
+	@Query("INSERT INTO Sweets(id, item, kind, stock) VALUES(id, item, kind, stock)")
+	void insertItem(@Param("id") String id, @Param("item") String item, @Param("kind") String kind, @Param("stock") int stock);
 	
 	@Modifying  // UPDATE,DELETE時に必要
 	@Query("DELETE FROM Sweets WHERE id = :id")
 	void deleteStock(@Param("id") String id);
 }
+
+//SELECT DISTINCT kind FROM Sweets

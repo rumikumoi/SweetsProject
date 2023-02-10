@@ -5,6 +5,7 @@ public class BackyardForm extends Sweets{
 	private int addStock;
 	private String id;
 	private String newItem;
+	private String kind;
 	
 	public void setAddStock(int addStock) {
 		this.addStock = addStock;
@@ -22,11 +23,19 @@ public class BackyardForm extends Sweets{
 		return id;
 	}
 	
-	public void setItemName(String newItem) {
+	public void setNewItem(String newItem) {
 		this.newItem = newItem;
 	}
 	
-	public String getItemName() {
+	public String getNewItem() {
 		return newItem;
+	}
+	
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	
+	public String getKind() {
+		return kind;
 	}
 }
