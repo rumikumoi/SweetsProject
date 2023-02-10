@@ -30,6 +30,8 @@ public class BackyardController {
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		model.addAttribute("backyardForm", backyardForm);
 		
+		String msg = "在庫補充を行いました！";
+		model.addAttribute("msg", msg);
 		return "backyard";
 	}
 	
@@ -41,7 +43,9 @@ public class BackyardController {
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
 		model.addAttribute("backyardForm", form);
-
+		
+		String msg = "新規商品の追加を行いました！";
+		model.addAttribute("msg", msg);
 		return "backyard";
 	}
 	
@@ -53,6 +57,8 @@ public class BackyardController {
 		BackyardForm form = new BackyardForm();
 		model.addAttribute("backyardForm", form);
 
+		String msg = "商品の削除を行いました！";
+		model.addAttribute("msg", msg);
 		return "backyard";
 	}
 }

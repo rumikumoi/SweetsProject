@@ -14,6 +14,11 @@
 			<div class="hero-body">
 			    <h1 class="title grad2"><a href="/backyard">バックヤード</a></h1>
 			</div>
+			
+			<div class="executProcess">
+				<p th:if="${msg != null}" th:text="${msg}" />
+			</div>
+			
 			<div class="hero-foot align-right">
 				<a href="/shop" target="_blank">ショップへ戻る</a>
 			</div>
@@ -32,7 +37,7 @@
 								<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
 							</select>
 						</div>
-						<input type="number" th:field="${backyardForm.addStock}"/>
+						<input class="input" type="number" min=1 th:field="${backyardForm.addStock}"/>
 					</div>
 				</div>
 				<footer class="card-footer">
@@ -57,7 +62,7 @@
     			<option value="icecream">icecream</option>
 			</select>
           </div>
-          <input class="input" type="number" th:field="${backyardForm.addStock}">
+          <input class="input" type="number" min=1 th:field="${backyardForm.addStock}">
         </div>
 			</div>
 			<footer class="card-footer">

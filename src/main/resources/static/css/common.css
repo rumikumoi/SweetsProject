@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+.executProcess {
+  font-size: large;
+  font-weight: bold;
+  padding: 3px;
+  text-align: center;
+  color: yellow;
+  background-color: blue;
+}
+
 html, body {
 	height: 100%;
 	overflow: auto;
