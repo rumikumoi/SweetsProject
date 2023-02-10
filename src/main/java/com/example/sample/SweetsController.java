@@ -24,29 +24,18 @@ public class SweetsController {
 		return "showcase";
 	}
 
-//	@RequestMapping("/shop")
-//	public String shop(Model model) {
-//		model.addAttribute("sweetsForm", service.getShopData());
-//		return "shop";
-//	}
-//
-//	@PostMapping("/buy")
-//	public String buy(SweetsForm sweetsForm, Model model) {
-//		model.addAttribute("sweets", service.updateStock(sweetsForm));
-//		return "thanks";
-//	}
-
 	@RequestMapping("/shop")
-	public String shop2(Model model) {
-		model.addAttribute("sweetsForm", service.getShopData2());
+	public String shop(Model model) {
+		model.addAttribute("sweetsForm", service.getShopData());
 		return "shop";
 	}
 
 	@PostMapping("/buy")
-	public String buy2(SweetsForm sweetsForm, Model model) {
-		List<SweetsData> list = service.updateStock2(sweetsForm);
+	public String buy(SweetsForm sweetsForm, Model model) {
+		List<SweetsData> list = service.updateBuy(sweetsForm);
 		if (list.size() > 0) {
 			model.addAttribute("sweets", list);
+			model.addAttribute("total", service.calcTotal(list));
 			return "thanks";
 		} else {
 			model.addAttribute("sweetsForm", sweetsForm);

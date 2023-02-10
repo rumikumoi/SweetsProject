@@ -22,17 +22,17 @@
 			<header class="card-header">
 				<p class="card-header-title">在庫補充</p>
 			</header>
-			<form th:action="@{/stock-add}" method="POST">
+			<form th:action="@{/stock-add}" method="POST" th:object="${backyardForm}">
 			<div class="card-content">
 				<h3 th:if="${msg1 != null}" class="has-text-danger" th:text="${msg1}" />
 
 				<div class="card-content-form">
 					<div class="select">
-						<select>
-							<option></option>
+						<select th:field="${backyardForm.id}">
+							<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
 						</select>
 					</div>
-					<input class="input">
+					<input class="input" type="number" th:field="${backyardForm.addStock}">
 				</div>
 			</div>
 			<footer class="card-footer">
@@ -50,13 +50,13 @@
 			<div class="card-content">
 				<h3 th:if="${msg2 != null}" class="has-text-danger" th:text="${msg2}" />
         <div class="card-content-form">
-          <input class="input item" type="text" /> 
+          <input class="input item" type="text" th:field="${backyardForm.item}" required /> 
           <div class="select">
-            <select>
-              <option></option>
+            <select th:field="${backyardForm.kind}">
+              <option th:each="kind : ${backyardForm.kindList}" th:value="${kind}">[[${kind}]]</option>
             </select>
           </div>
-          <input class="input">
+          <input class="input" type="number" th:field="${backyardForm.stock}">
         </div>
 			</div>
 			<footer class="card-footer">
@@ -75,15 +75,15 @@
 				<h3 th:if="${msg3 != null}" class="has-text-danger" th:text="${msg3}" />
         <div class="card-content-form">
           <div class="select">
-            <select>
-              <option></option>
+            <select th:field="${backyardForm.id}">
+              <option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
             </select>
           </div>
         </div>
 			</div>
 			<footer class="card-footer">
 				<div class="card-footer-item">
-					<button class="button is-primary" type="submit">削除</button>
+					<button class="button is-primary" type="submit" onClick="confirm('削除してもよろしいですか？')">削除</button>
 				</div>
 			</footer>
 		    </form>

@@ -21,6 +21,9 @@ public class Sweets {
 		
 		@Column
 		private int stock;
+		
+		@Column
+		private int unitPrice;		
 
 		public String getId() {
 			return id;
@@ -54,4 +57,11 @@ public class Sweets {
 			this.stock = stock;
 		}
 
+		public int getUnitPrice() {
+			return unitPrice;
+		}
+		
+		public void setUnitPrice(int price) {
+			this.unitPrice = price;
+		}
 }

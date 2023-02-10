@@ -21,9 +21,10 @@
 			<div class="card-content">
 				<ul class="shop-list">
 					<li class="shop-list-item" th:each="sweets : ${sweets}">
-						<label th:text="${sweets.item} + ' ' + ${sweets.purchases} + '個'">
+						<label th:text="${sweets.item} + ' ' + ${T(java.lang.String).format('%,d', sweets.unitPrice)} + '円 ' + ${sweets.purchases} + '個'">
 					</li>
 				</ul>
+				<p class="total">合計金額：[[${T(java.lang.String).format('%,d', total)}]]円</p>
 			</div>
 			<footer class="card-footer">
 				<div class="card-footer-item">

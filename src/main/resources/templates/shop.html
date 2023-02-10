@@ -31,7 +31,7 @@
 								<label th:text="*{sweetsList[__${st.index}__].item}" />
 							</div>
 							<div class="column is-number">
-								<span style="margin-left: 5px;" th:text="*{sweetsList[__${st.index}__].stock}" />個
+								<span style="margin-left: 5px;" th:text="*{T(java.lang.String).format('%,d', sweetsList[__${st.index}__].unitPrice)}" />円
 							</div>
 							<div class="column">
 								<div class="select is-small" th:if="*{sweetsList[__${st.index}__].stock} > 0">
@@ -48,6 +48,7 @@
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].kind}" />
 								-->
 								<input type="hidden" th:field="*{sweetsList[__${st.index}__].stock}" />
+                <input type="hidden" th:field="*{sweetsList[__${st.index}__].unitPrice}" />
 							</div>
 						</div>
 					</li>

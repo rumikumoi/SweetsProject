@@ -1,7 +1,8 @@
 package com.example.sample;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,18 +12,31 @@ import com.example.sample.entity.Sweets;
 import com.example.sample.service.BackyardService;
 import com.example.sample.service.SweetsService;
 
-@Controller
+//@Controller
 public class BackyardController {
 
 	@Autowired
 	BackyardService backyardService;
 	@Autowired
 	SweetsService sweetsService;
+	
+	private List<Sweets> getSweetsList() {
+		return sweetsService.getShowcaseData();
+	}
+
+	private List<String> getKindList() {
+		return backyardService.getKindList();
+	}
 
 	@RequestMapping("/backyard")
 	public String backyard(Model model) {
+		model.addAttribute("sweetsList", getSweetsList());
+		BackyardForm form = new BackyardForm();
+		// 新規商品追加表示用種類一覧
+		form.setKindList(getKindList());
+		model.addAttribute("backyardForm", form);
 
-		return "backyard";
+		return "backyard2";
 	}
 
 	/**
@@ -30,9 +44,15 @@ public class BackyardController {
 	 */
 	@PostMapping("/stock-add")
 	public String stockAdd(BackyardForm form, Model model) {
-		model.addAttribute("msg1", "在庫を更新しました");
+		model.addAttribute("msg1", backyardService.addStock(form.getId(), form.getAddStock()));
+
+		// 続けて更新ができるよう商品一覧とformを再送
+		model.addAttribute("sweetsList", sweetsService.getShowcaseData());
+		// 新規商品追加表示用種類一覧
+		form.setKindList(getKindList());
+		model.addAttribute("backyardForm", form);
 		
-		return "backyard";
+		return "backyard2";
 	}
 
 	/**
@@ -40,9 +60,16 @@ public class BackyardController {
 	 */
 	@PostMapping("/item-insert")
 	public String itemInsert(Sweets sweets, Model model) {
-		model.addAttribute("msg2", "商品を追加しました");
+		model.addAttribute("msg2", backyardService.insertItem(sweets));
 
-		return "backyard";
+		// 続けて更新ができるよう商品一覧とformを再送
+		model.addAttribute("sweetsList", getSweetsList());
+		BackyardForm form = new BackyardForm();
+		// 新規商品追加表示用種類一覧
+		form.setKindList(getKindList());
+		model.addAttribute("backyardForm", form);
+
+		return "backyard2";
 	}
 
 	/**
@@ -50,9 +77,16 @@ public class BackyardController {
 	 */
 	@PostMapping("/item-delete")
 	public String itemDelete(String id, Model model) {
-		model.addAttribute("msg3", "商品を削除しました");
+		model.addAttribute("msg3", backyardService.deleatItem(id));
+		
+		// 続けて更新ができるよう商品一覧とformを再送
+		model.addAttribute("sweetsList", getSweetsList());
+		BackyardForm form = new BackyardForm();
+		// 新規商品追加表示用種類一覧
+		form.setKindList(getKindList());
+		model.addAttribute("backyardForm", form);
 
-		return "backyard";
+		return "backyard2";
 	}
 
 }
