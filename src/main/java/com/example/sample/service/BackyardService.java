@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.sample.entity.Sweets;
-import com.example.sample.repository.SweetsRepository;
+import com.example.sample.repository.BackyardRepository;
 
 @Service
 public class BackyardService {
 	
 	@Autowired
-	SweetsRepository repository;	
+	BackyardRepository repository;
+	
+	public List<String> getKindList() {
+		return repository.getKindList();
+	}
 	
 	public String getMaxID() {
 		return repository.getMaxID();
@@ -28,7 +32,8 @@ public class BackyardService {
 	}
 
 
-	public void insertItem(String id,String item, String kind, int stock) {
+	public void insertItem(String item, String kind, int stock) {
+		String id = String.format("%03d",Integer.parseInt(getMaxID()) + 1);
 		repository.InsertItem(id, item, kind, stock);
 	}
 

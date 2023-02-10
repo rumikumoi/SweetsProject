@@ -57,12 +57,20 @@
         <div class="card-content-form">
           <input class="input item" type="text" th:field="${backyardForm.item}" required /> 
           <div class="select">
+        
+          		<select th:field="${backyardForm.kind}">
+					<option th:each="kind : ${backyardForm.kindList}" th:value="${kind}">[[${kind}]]</option>
+				</select>
+				
+			<!--
             <select th:field="${backyardForm.kind}">
 				<option value="cake">cake</option>
     			<option value="icecream">icecream</option>
 			</select>
+			-->
+			
           </div>
-          <input class="input" type="number" min=1 th:field="${backyardForm.addStock}">
+          <input class="input" type="number" min=1 th:field="${backyardForm.stock}">
         </div>
 			</div>
 			<footer class="card-footer">

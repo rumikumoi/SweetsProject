@@ -1,5 +1,7 @@
 package com.example.sample;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,15 @@ public class BackyardController {
 	@Autowired
 	BackyardService backyardService;
 	
+	private List<String> getKindList() {
+		return backyardService.getKindList();
+	}
+	
 	@RequestMapping("/backyard")
 	public String backyard(Model model) {
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm backyardForm = new BackyardForm();
+		backyardForm.setKindList(getKindList());
 		model.addAttribute("backyardForm", backyardForm);
 		return "backyard";
 	}
@@ -37,8 +44,7 @@ public class BackyardController {
 	
 	@PostMapping("/item-insert")
 	public String itemInsert(BackyardForm backyardForm, Model model) {
-		String id = String.format("%03d",Integer.parseInt(backyardService.getMaxID()) + 1);
-		backyardService.insertItem(id, backyardForm.getItem(), backyardForm.getKind(), backyardForm.getAddStock());
+		backyardService.insertItem(backyardForm.getItem(), backyardForm.getKind(), backyardForm.getAddStock());
 
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();

@@ -18,16 +18,5 @@ public interface SweetsRepository extends JpaRepository<Sweets, String> {
 	@Modifying  // UPDATE,DELETE時に必要
 	@Query("UPDATE Sweets SET stock = (stock - :stock) where id = :id")
 	void updateStock(@Param("stock") int stock, @Param("id") String id);
-
-	@Modifying
-	@Query("UPDATE Sweets SET stock = (stock + :stock) where id = :id")
-	void addStock(@Param("stock") int stock, @Param("id") String id);
 	
-	@Modifying
-	@Query("INSERT INTO Sweets (id, item, kind, stock) VALUES ( :id, :item, :kind, :stock)")
-	void InsertItem(@Param("id") String id, @Param("item") String item, @Param("kind") String kind, @Param("stock") int stock);
-	
-	@Modifying
-	@Query("DELETE FROM Sweets where id = :id")
-	void deleteItem(@Param("id") String id);
 }
