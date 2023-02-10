@@ -50,6 +50,15 @@ html, body {
 	white-space: nowrap;
 }
 
+.total {
+  font-size: large;
+  font-weight: bold;
+  background-color: rgb(255, 169, 83);
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border-radius: 0.3rem;
+}
+
 .card-content-form {
 	display: flex;
 }
@@ -68,4 +77,9 @@ html, body {
 
 .align-right {
 	text-align: right;
+}
+
+.input.item {
+  margin-right: 1rem;
+  width: 10rem;
 }

@@ -1,45 +1,94 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<head> 
+    <title>Sweets Paradise</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link th:href="@{/css/common.css}" rel="styleSheet">
 </head>
-<body>
-	<h1>Backyard</h1>
+<body class="has-background-info-light">
+	<div class="container">
+		<section class="hero">
+			<img class="hero-cover" th:src="@{/images/backyard.jpg}">
+			<div class="hero-body">
+			    <h1 class="title grad2"><a href="/backyard">バックヤード</a></h1>
+			</div>
+			<div class="hero-foot align-right">
+				<a href="/shop" target="_blank">ショップへ戻る</a>
+			</div>
+		</section>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">在庫補充</p>
+			</header>
+			<form th:action="@{/stock-add}" method="POST" th:object="${backyardForm}">
+				<div class="card-content">
+					<h3 th:if="${msg1 != null}" class="has-text-danger" th:text="${msg1}" />
 	
-	<form th:action="@{/stock-add}" method="POST" th:object="${backyardForm}">
-		<h2>在庫補充</h2>
-		<div>
-			<select th:field="${backyardForm.id}">
-				<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
-			</select>
-			<input type="number" th:field="${backyardForm.addStock}"/>
-			<button type="submit">補充</button>
-		</div>
-	</form>
-	
-	<form th:action="@{/item-insert}" method="POST" th:object="${backyardForm}">
-		<h2>新規商品の追加</h2>
-		<div>
-			<input type="text" th:field="${backyardForm.item}"/>
-			
-			<select th:field="${backyardForm.kind}">
+					<div class="card-content-form">
+						<div class="select">
+							<select th:field="${backyardForm.id}">
+								<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+							</select>
+						</div>
+						<input type="number" th:field="${backyardForm.addStock}"/>
+					</div>
+				</div>
+				<footer class="card-footer">
+					<div class="card-footer-item">
+						<button class="button is-primary" type="submit">補充</button>
+					</div>
+				</footer>
+		    </form>
+	    </div>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">新規商品の追加</p>
+			</header>
+			<form th:action="@{/item-insert}" method="POST" th:object="${backyardForm}">
+			<div class="card-content">
+				<h3 th:if="${msg2 != null}" class="has-text-danger" th:text="${msg2}" />
+        <div class="card-content-form">
+          <input class="input item" type="text" th:field="${backyardForm.item}" required /> 
+          <div class="select">
+            <select th:field="${backyardForm.kind}">
 				<option value="cake">cake</option>
     			<option value="icecream">icecream</option>
 			</select>
-			<input type="number" th:field="${backyardForm.addStock}"/>
-			<button type="submit">追加</button>
-		</div>
-	</form>
-	
-	<form th:action="@{/item-delete}" method="POST" th:object="${backyardForm}">
-		<h2>商品の削除</h2>
-		<div>
-			<select th:field="${backyardForm.id}">
-				<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
-			</select>
-			<button type="submit">削除</button>
-		</div>
-	</form>
+          </div>
+          <input class="input" type="number" th:field="${backyardForm.addStock}">
+        </div>
+			</div>
+			<footer class="card-footer">
+				<div class="card-footer-item">
+					<button class="button is-primary" type="submit">追加</button>
+				</div>
+			</footer>
+		    </form>
+	    </div>
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">商品の削除</p>
+			</header>
+			<form th:action="@{/item-delete}" method="POST" th:field="${backyardForm.stock}">
+			<div class="card-content">
+				<h3 th:if="${msg3 != null}" class="has-text-danger" th:text="${msg3}" />
+        <div class="card-content-form">
+          <div class="select">
+            <select th:field="${backyardForm.id}">
+              <option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+            </select>
+          </div>
+        </div>
+			</div>
+			<footer class="card-footer">
+				<div class="card-footer-item">
+					<button class="button is-primary" type="submit" onClick="confirm('削除してもよろしいですか？')">削除</button>
+				</div>
+			</footer>
+		    </form>
+	    </div>
+    </div>
 </body>
 </html>
