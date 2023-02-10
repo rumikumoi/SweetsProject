@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Backyard</h1>
+	
+	<form th:action="@{/stock-add}" method="POST" th:object="${backyardForm}">
+		<h2>在庫補充</h2>
+		<div>
+			<select th:field="${backyardForm.id}">
+				<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+			</select>
+			<input type="number" th:field="${backyardForm.addStock}"/>
+			<button type="submit">補充</button>
+		</div>
+	</form>
+	
+	<form th:action="@{/item-insert}" method="POST" th:object="${backyardForm}">
+		<h2>新規商品の追加</h2>
+		<div>
+			<input type="text" th:field="${backyardForm.item}"/>
+			
+			<select th:field="${backyardForm.kind}">
+				<option value="cake">cake</option>
+    			<option value="icecream">icecream</option>
+			</select>
+			<input type="number" th:field="${backyardForm.addStock}"/>
+			<button type="submit">追加</button>
+		</div>
+	</form>
+	
+	<form th:action="@{/item-delete}" method="POST" th:object="${backyardForm}">
+		<h2>商品の削除</h2>
+		<div>
+			<select th:field="${backyardForm.id}">
+				<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+			</select>
+			<button type="submit">削除</button>
+		</div>
+	</form>
+</body>
+</html>
