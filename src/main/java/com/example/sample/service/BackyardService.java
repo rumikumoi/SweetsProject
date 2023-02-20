@@ -18,8 +18,10 @@ public class BackyardService {
 		return repository.getKindList();
 	}
 	
-	public String getMaxID() {
-		return repository.getMaxID();
+	public int getMaxID() {
+		String maxId = repository.getMaxID();
+		int nextId = Integer.parseInt(maxId) + 1;
+		return nextId;
 	}
 
 	public List<Sweets> getSweetsList() {
@@ -33,7 +35,7 @@ public class BackyardService {
 
 
 	public void insertItem(String item, String kind, int stock) {
-		String id = String.format("%03d",Integer.parseInt(getMaxID()) + 1);
+		String id = String.format("%03d",getMaxID());
 		repository.InsertItem(id, item, kind, stock);
 	}
 

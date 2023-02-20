@@ -54,9 +54,9 @@ public class SweetsService {
 	 * お買い上げ商品のリストを返却
 	 * @return List<Sweets>
 	 */
-	public List<Sweets> updateBuy(SweetsForm sweetsForm) {
+	public List<SweetsData> updateBuy(SweetsForm sweetsForm) {
 		// お買い上げリスト
-		List<Sweets> shoppingList = new ArrayList<Sweets>();
+		List<SweetsData> shoppingList = new ArrayList<SweetsData>();
 		// チェックのついた商品のみお買い上げ
 		for (SweetsData sweets : sweetsForm.getSweetsList()) {
 			if(sweets.getPurchases() > 0) {

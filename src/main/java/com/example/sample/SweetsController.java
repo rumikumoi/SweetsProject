@@ -32,13 +32,13 @@ public class SweetsController {
 
 	@PostMapping("/buy")
 	public String buy(SweetsForm sweetsForm, Model model) {
-		List<SweetsData> list = service.updateStock(sweetsForm);
+		List<SweetsData> list = service.updateBuy(sweetsForm);
 		if(list.size() == 0) {
 			model.addAttribute("sweetsForm", sweetsForm);
 			model.addAttribute("msg", "商品を選んで下さい");
 			return "shop";
 		} else {
-			model.addAttribute("sweets", service.updateBuy(sweetsForm));
+			model.addAttribute("sweets", list);
 			return "thanks";
 		}
 	}

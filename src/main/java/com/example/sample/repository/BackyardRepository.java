@@ -14,21 +14,29 @@ import com.example.sample.entity.Sweets;
 @Transactional
 @Repository
 public interface BackyardRepository extends JpaRepository<Sweets, String> {
+
 	@Query("SELECT MAX(id) FROM Sweets")
 	String getMaxID();
 
 	@Modifying
 	@Query("UPDATE Sweets SET stock = (stock + :stock) where id = :id")
 	void addStock(@Param("stock") int stock, @Param("id") String id);
-	
+
 	@Modifying
 	@Query("INSERT INTO Sweets (id, item, kind, stock) VALUES ( :id, :item, :kind, :stock)")
 	void InsertItem(@Param("id") String id, @Param("item") String item, @Param("kind") String kind, @Param("stock") int stock);
+	
+//	@Modifying
+//	@Query("INSERT INTO Sweets (id, item, kind, stock) VALUES ( :id, :item, :kind, :stock) WHERE NOT EXISTS(SELECT * FROM Sweets WHERE item = :item)")
+//	void InsertItem(@Param("id") String id, @Param("item") String item, @Param("kind") String kind, @Param("stock") int stock);
 	
 	@Modifying
 	@Query("DELETE FROM Sweets where id = :id")
 	void deleteItem(@Param("id") String id);
 	
+	@Modifying
 	@Query("SELECT DISTINCT kind FROM Sweets")
 	List<String> getKindList();
+	
+	
 }

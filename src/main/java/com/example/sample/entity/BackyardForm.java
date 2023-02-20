@@ -3,7 +3,9 @@ package com.example.sample.entity;
 import java.util.List;
 
 public class BackyardForm extends Sweets{
+	
 	private int addStock;
+	
 	private List<String> kindList;
 	
 	public void setAddStock(int addStock) {

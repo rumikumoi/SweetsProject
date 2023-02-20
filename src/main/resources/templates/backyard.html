@@ -9,20 +9,24 @@
 </head>
 <body class="has-background-info-light">
 	<div class="container">
+	
 		<section class="hero">
 			<img class="hero-cover" th:src="@{/images/backyard.jpg}">
 			<div class="hero-body">
 			    <h1 class="title grad2"><a href="/backyard">バックヤード</a></h1>
 			</div>
 			
+			<!--
 			<div class="executProcess">
 				<p th:if="${msg != null}" th:text="${msg}" />
 			</div>
+			-->
 			
 			<div class="hero-foot align-right">
 				<a href="/shop" target="_blank">ショップへ戻る</a>
 			</div>
 		</section>
+		
 		<div class="card">
 			<header class="card-header">
 				<p class="card-header-title">在庫補充</p>
@@ -47,6 +51,7 @@
 				</footer>
 		    </form>
 	    </div>
+	    
 		<div class="card">
 			<header class="card-header">
 				<p class="card-header-title">新規商品の追加</p>
@@ -57,18 +62,9 @@
         <div class="card-content-form">
           <input class="input item" type="text" th:field="${backyardForm.item}" required /> 
           <div class="select">
-        
           		<select th:field="${backyardForm.kind}">
 					<option th:each="kind : ${backyardForm.kindList}" th:value="${kind}">[[${kind}]]</option>
 				</select>
-				
-			<!--
-            <select th:field="${backyardForm.kind}">
-				<option value="cake">cake</option>
-    			<option value="icecream">icecream</option>
-			</select>
-			-->
-			
           </div>
           <input class="input" type="number" min=1 th:field="${backyardForm.stock}">
         </div>
@@ -80,28 +76,30 @@
 			</footer>
 		    </form>
 	    </div>
+	    
 		<div class="card">
 			<header class="card-header">
 				<p class="card-header-title">商品の削除</p>
 			</header>
 			<form th:action="@{/item-delete}" method="POST" th:field="${backyardForm.stock}">
-			<div class="card-content">
-				<h3 th:if="${msg3 != null}" class="has-text-danger" th:text="${msg3}" />
-        <div class="card-content-form">
-          <div class="select">
-            <select th:field="${backyardForm.id}">
-              <option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
-            </select>
-          </div>
-        </div>
-			</div>
-			<footer class="card-footer">
-				<div class="card-footer-item">
-					<button class="button is-primary" type="submit" onClick="confirm('削除してもよろしいですか？')">削除</button>
+				<div class="card-content">
+					<h3 th:if="${msg3 != null}" class="has-text-danger" th:text="${msg3}" />
+					<div class="card-content-form">
+						<div class="select">
+							<select th:field="${backyardForm.id}">
+								<option th:each="sweets : ${sweetsList}" th:value="${sweets.id}">[[${sweets.item}]]</option>
+							</select>
+						</div>
+					</div>
 				</div>
-			</footer>
-		    </form>
+				<footer class="card-footer">
+					<div class="card-footer-item">
+						<button class="button is-primary" type="submit" onClick="confirm('削除してもよろしいですか？')">削除</button>
+					</div>
+				</footer>
+			</form>
 	    </div>
+	    
     </div>
 </body>
 </html>

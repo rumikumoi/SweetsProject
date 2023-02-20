@@ -17,7 +17,7 @@ public class BackyardController {
 	@Autowired
 	BackyardService backyardService;
 	
-	private List<String> getKindList() {
+	public List<String> getKindList() {
 		return backyardService.getKindList();
 	}
 	
@@ -34,24 +34,26 @@ public class BackyardController {
 	public String stockAdd(BackyardForm backyardForm, Model model) {
 		backyardService.addStock(backyardForm.getId(), backyardForm.getAddStock());
 
+		backyardForm.setKindList(getKindList());
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		model.addAttribute("backyardForm", backyardForm);
 		
-		String msg = "在庫補充を行いました！";
-		model.addAttribute("msg", msg);
+		String msg1 = "在庫補充を行いました！";
+		model.addAttribute("msg1", msg1);
 		return "backyard";
 	}
 	
 	@PostMapping("/item-insert")
 	public String itemInsert(BackyardForm backyardForm, Model model) {
-		backyardService.insertItem(backyardForm.getItem(), backyardForm.getKind(), backyardForm.getAddStock());
+		backyardService.insertItem(backyardForm.getItem(), backyardForm.getKind(), backyardForm.getStock());
 
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 		
-		String msg = "新規商品の追加を行いました！";
-		model.addAttribute("msg", msg);
+		String msg2 = "新規商品の追加を行いました！";
+		model.addAttribute("msg2", msg2);
 		return "backyard";
 	}
 	
@@ -61,10 +63,11 @@ public class BackyardController {
 
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
-		String msg = "商品の削除を行いました！";
-		model.addAttribute("msg", msg);
+		String msg3 = "商品の削除を行いました！";
+		model.addAttribute("msg3", msg3);
 		return "backyard";
 	}
 }
