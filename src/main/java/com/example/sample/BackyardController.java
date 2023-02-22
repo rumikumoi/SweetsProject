@@ -54,7 +54,7 @@ public class BackyardController {
 		// 続けて更新ができるよう商品一覧とformを再送
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
-//		// 新規商品追加表示用種類一覧
+		// 新規商品追加表示用種類一覧
 //		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
