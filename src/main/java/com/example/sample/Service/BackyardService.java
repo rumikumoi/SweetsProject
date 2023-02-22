@@ -29,11 +29,25 @@ public class BackyardService {
 	}
 	
 	public String insertItem(Sweets sweets) {
-		String msg = "商品を新規追加しました";
+		String msg = "";
 		
-		repository.insertItem( );
+		if (sweets.getStock() > 0) {
+			repository.insertItem(getNextId(), sweets.getItem(), sweets.getKind(), sweets.getStock() );
+			
+			msg = "商品を新規追加しました";
+		}else {
+			msg = "在庫は０以上に指定をしてください";
+		}
 		
 		return msg;
+	}
+	
+	public String getNextId() {
+		String maxId = repository.maxId();
+			
+		int nextId = Integer.parseInt(maxId) + 1 ;
+		
+		return String.format("%03d", nextId) ;
 	}
 	
 	public String itemDelete(String id) {
