@@ -20,10 +20,15 @@ public class BackyardService {
 	}
 	
 	public String addStock(String id, int addStock) {
-		String msg = "在庫数を補充しました";
+		String msg ;
 		
-		//repositoryでDB更新
-		repository.addStock(addStock, id);
+		if(addStock > 0) {
+			//repositoryでDB更新
+			repository.addStock(addStock, id);
+			msg = "在庫数を補充しました";
+		}else {
+			msg = "在庫は0以上を指定してください";
+		}
 		
 		return msg;
 	}
@@ -50,12 +55,17 @@ public class BackyardService {
 		return String.format("%03d", nextId) ;
 	}
 	
+	
 	public String itemDelete(String id) {
 		String msg = "商品を削除しました";
 		
 		repository.itemDelete( id );
 		
 		return msg;
+	}
+
+	public List<String> getKindList() {
+		return repository.getKindList();
 	}
 
 

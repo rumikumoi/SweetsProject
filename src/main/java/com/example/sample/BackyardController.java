@@ -1,5 +1,7 @@
 package com.example.sample;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,15 @@ public class BackyardController {
 	@Autowired
 	BackyardService backyardService;
 	
+	private List<String> getKindList(){
+		return backyardService.getKindList();
+	}
+	
 	@RequestMapping("/backyard")
 	public String backyard(Model model) {
 		model.addAttribute("sweetsList",backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 		return "backyard";
 	}
@@ -31,17 +38,19 @@ public class BackyardController {
 	
 		// 続けて更新ができるよう商品一覧とformを再送
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 		
 		return "backyard";
 	}
 	
 	@PostMapping("/item-insert")
-	public String itemInsert(Sweets sweets, Model model) {
+	public String insertItem(Sweets sweets, Model model) {
 		model.addAttribute("msg2",backyardService.insertItem(sweets));
 		
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 		
 		return "backyard";
@@ -55,7 +64,7 @@ public class BackyardController {
 		model.addAttribute("sweetsList", backyardService.getSweetsList());
 		BackyardForm form = new BackyardForm();
 		// 新規商品追加表示用種類一覧
-//		form.setKindList(getKindList());
+		form.setKindList(getKindList());
 		model.addAttribute("backyardForm", form);
 
 		return "backyard";

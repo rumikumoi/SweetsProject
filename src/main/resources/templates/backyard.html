@@ -49,16 +49,15 @@
 			<form th:action="@{/item-insert}" method="POST">
 			<div class="card-content">
 				<h3 th:if="${msg2 != null}" class="has-text-danger" th:text="${msg2}" />
+		<div class="card-content-form">
+			<input class="input item" type="text" require th:field="${backyardForm.item}" required />
+			<div class="select">
+				<select th:field="${backyardForm.kind}">
+					<option th:each="kind : ${backyardForm.kindList}" th:value="${kind}">[[${kind}]]</option>
+				</select>
 			</div>
-			<div class="card-content-form">
-				<input type="text" require th:field="${backyardForm.item}">
-				<div class="select">
-					<select th:field="${backyardForm.kind}">
-						<option th:each="sweets : ${sweetsList}" th:value="${sweets.kind}">[[${sweets.kind}]]</option>
-					</select>
-				</div>
-				<input class="input" type="number" th:field="${backyardForm.stock}">
-			</div>
+			<input class="input" type="number" th:field="${backyardForm.stock}">
+		</div>
 			<footer class="card-footer">
 				<div class="card-footer-item">
 					<button class="button is-primary" type="submit">追加</button>
